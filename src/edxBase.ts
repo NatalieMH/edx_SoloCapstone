@@ -60,15 +60,9 @@ export class EdxBase {
     let exploreCourses = await this.driver.wait(until.elementLocated(this.exploreAllCourses));
     await exploreCourses.click();
     }
-    async searchingHeader(searchTerm,searchArray: Array<string>) {
+    async searchingHeader(searchTerm) {
         await this.click(this.searchBarHome);
         await this.driver.switchTo().activeElement().sendKeys(`${searchTerm}\n`);
-        let searches = await this.driver.wait(until.elementsLocated(By.className('d-md-block')));
-        for(let i = 1; i < searches.length; i++) {
-            let label = await this.driver.findElement(By.xpath(`(//div[@class = "d-md-block"])[${i}]`));
-            searchArray.push(await label.getText());
-        }
-        return searchArray;
     }
     async click(elementBy: By) {
     await this.driver.wait(until.elementLocated(elementBy));
