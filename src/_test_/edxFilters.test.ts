@@ -75,12 +75,12 @@ const driver: WebDriver = new Builder()
     await schoolsPartners.click();
     let schoolsArray = await driver.findElements(By.xpath('//img[@class = "school-img"]'));//makes an array of all schools/partners
     await driver.sleep(1000);
-    let school = await driver.findElement(By.xpath(`(//img[@class = "school-img"])[${Math.floor(Math.random()*(schoolsArray.length - 0 + 1) +1)}]`));//finds a random school within the list
+    let school = await driver.findElement(By.xpath(`(//img[@class = "school-img"])[${Math.floor(Math.random()*((schoolsArray.length-1) - 0 + 1) +1)}]`));//finds a random school within the list
     let selectSchool = await school.getAttribute('src');//finds the value of the src in the school image
     await school.click();
     await driver.sleep(1000);
     let schoolsArray2 = await driver.findElements(By.css('.partner-logo'));//makes an array of all courses for that school
-    let school2 = await driver.findElement(By.xpath(`(//img[@class = "partner-logo"])[${Math.floor(Math.random()*(schoolsArray2.length - 0 + 1) + 1)}]`));//picks a random course from the array
+    let school2 = await driver.findElement(By.xpath(`(//img[@class = "partner-logo"])[${Math.floor(Math.random()*((schoolsArray2.length-1) - 0 + 1) + 1)}]`));//picks a random course from the array
     let selectSchool2 = await school2.getAttribute('src');//gets the src of the logo image attached to the course
     expect(selectSchool).toBe(selectSchool2);//compares the src of the images from the school and the course
 });
