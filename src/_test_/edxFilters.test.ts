@@ -99,9 +99,9 @@ test("Can sort by Program", async() => {
     expect(await (await filterProgram.getText()).toLowerCase()).toContain("professional certificate");
     let pcArray = await driver.findElements(By.className('professional-certificate'));
     let selectProgram = pcArray[Math.floor(Math.random()*pcArray.length)];
-    await selectProgram.click();
+    await selectProgram.click();// select a program with type professional certificate
     let courseProgram = await driver.wait(until.elementLocated(By.xpath('(//span[contains(text(),"Professional Certificate")])[1]')));
-    expect(await courseProgram.getText()).toContain("Professional Certificate");
+    expect(await courseProgram.getText()).toContain("Professional Certificate");//expect the text to include Professional Certificate on the page of the program
 });
 test("Can sort by Level", async() => {
     await edx.exploringCourses();
@@ -109,14 +109,14 @@ test("Can sort by Level", async() => {
     await level.click();
     await driver.wait(until.elementLocated(By.css('label[for = "level-0"]')));
     let introductory = await driver.wait(until.elementLocated(By.css('label[for = "level-0"]')));
-    await introductory.click();
+    await introductory.click(); //Click on Introductory under the Level filter
     let filterLevel = await driver.wait(until.elementLocated(By.xpath('(//span[contains(text(),"Introductory")])[2]')));
     expect(await (await filterLevel.getText()).toLowerCase()).toContain("introductory");
     let introArray = await driver.findElements(By.className('Verified'));
     let selectCourse = introArray[Math.floor(Math.random()*introArray.length)];
     await selectCourse.click();
     let courseLevel = await driver.wait(until.elementLocated(By.xpath('//div[contains(text(),"Introductory")]')));
-    expect(await courseLevel.getText()).toContain("Introductory");
+    expect(await courseLevel.getText()).toContain("Introductory");//A random course chosen should include Level: Introductory
   });
 test("Can sort by Availability", async() => {
     await edx.exploringCourses();
@@ -131,7 +131,7 @@ test("Can sort by Availability", async() => {
     let availableArray = await driver.findElements(By.className('Verified'));
     let selectCourse = availableArray[Math.floor(Math.random()*availableArray.length)];
     await selectCourse.click();
-    let courseAvailability = await driver.wait(until.elementLocated(By.className('active')));
+    let courseAvailability = await driver.wait(until.elementLocated(By.className('active')));//after filtering by Available Now, the course should have an active course available
     expect(await courseAvailability).toBeTruthy();
   }); 
   
